@@ -1,22 +1,21 @@
-const messages = [
-    {
-        author: 'IY Academy', 
-        message: 'Hello world! I`m IT Academy'
-    },
-    {
-        author: 'LeVaSiK', 
-        message: 'Hello world! I`m LeVaSiK'
-    },
-];
+import { formatDate, createElement } from "./utils.js";
+
+
+const messages = JSON.parse(localStorage.getItem('messages')) || [];
 
 const sendBtn = document.querySelector("#sendBtn");
 const posts = document.querySelector(".posts");
+
 const authorM = document.getElementById("create-msg-author");
 const messageM = document.querySelector("#create-msg-text");
+
 const authorError = document.querySelector(".authorError");
 const textError = document.querySelector(".textError");
+const selectError = document.querySelector(".selectError");
+
 const closeAut = document.querySelector(".closeAut");
 const closeText = document.querySelector(".closeText");
+
 const modalAuthor = document.querySelector(".modal-author");
 const modalText = document.querySelector(".modal-texts");
 
@@ -34,59 +33,57 @@ function windowOnClickAuthor(event) {
         toggleModalAuthor();
     };
 };
+
 function windowOnClickText(event) {
     if(event.target === modalText){
         toggleModalText();
     };
 };
 
-const createElement = (tag, className, innerTxt) => {
-    if(!tag){
-        alert('Внутренняя ошибка сервиса!');
-        return;
-    }
-    
-    const element = document.createElement(tag);
 
-    if(className){
-        element.className = className;
-    };
-
-    if(innerTxt){
-        element.innerText = innerTxt;
-    }
-    
-    return element;
-};
-
-const renderMessages = (messages) => {
+const renderMessages = () => {
+    clearPost(posts);
     for (let i = 0; i < messages.length; i++) {
         const element = messages[i];
-        const message = createElement('li', 'msg');
+        
+        let message;
+        if(element.bgColor === 'black'){
+            message = createElement('li', 'msgsB');
+        }else{
+            message = createElement('li', 'msgsW');
+        };
+        
         const author = createElement('div', 'author', element.author);
         const text = createElement('div', 'text', element.message);
-        message.append(author, text);
+        const date = createElement('div', 'date', formatDate(element.createdAt));
+
+        
+        message.append(author, date, text);
         posts.prepend(message);
     };
+    
 };
+
+
 const clearInputs = () => {
     authorM.value = '';
     messageM.value = '';
 };
 
+
 const clearPost = (posts) => {
     posts.innerHTML = '';
 };
-
-renderMessages(messages);
-
+renderMessages();
 
 sendBtn.addEventListener("click", function(){
-    const message = {};
+    const messageFin = {};
     let authorBool = false;
     let textBool = false;
-    if(authorM.value.length > 4){
-        message.author = authorM.value;
+    let selectBool = false;
+
+    if(authorM.value.length > 3){
+        messageFin.author = authorM.value;
         authorM.style.border = '1px solid black';
         authorBool = true;
         authorError.innerHTML = '';
@@ -97,8 +94,9 @@ sendBtn.addEventListener("click", function(){
         toggleModalAuthor();
         return;
     };
-    if(messageM.value.length > 10){
-        message.message = messageM.value;
+
+    if(messageM.value.length > 3){
+        messageFin.message = messageM.value;
         messageM.style.border = '1px solid black';
         textBool = true;
         textError.innerHTML = '';
@@ -109,16 +107,28 @@ sendBtn.addEventListener("click", function(){
         toggleModalText();
         return;
     };
-    if(authorBool && textBool){
-        messages.push(message);
-        clearInputs();
-        clearPost(posts);
-        renderMessages(messages);
+
+    const select = document.querySelector('.select').value;
+    if (select === ''){
+        selectBool = false;
+        selectError.innerHTML = 'Выберете тему!';
+        return;
+    }else{
+        messageFin.bgColor = select;
+        selectBool = true;
+        selectError.innerHTML = '';
     };
+    
+    messageFin.createdAt = Date.now();
+    if(authorBool && textBool && selectBool){
+        messages.push(messageFin);
+        localStorage.setItem('messages', JSON.stringify(messages));
+
+        clearInputs();
+        renderMessages();
+    };
+
 });
-
-
-
 
 window.addEventListener("click", windowOnClickAuthor);
 window.addEventListener("click", windowOnClickText);

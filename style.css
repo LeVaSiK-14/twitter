@@ -18,7 +18,7 @@ li {
 button {
   cursor: pointer;
 }
-input, textarea, button, .msg {
+input, textarea, button, .msg, .msgsW, .msgsB {
   border-radius: 8px;
   display: block;
 }
@@ -40,6 +40,22 @@ main {
   font-size: 18px;
   background-color: #fff;
   box-shadow: 4px 3px 10px rgba(0,0,0,0.3);
+}
+.msgsW {
+  padding: 20px;
+  margin-top: 20px;
+  font-size: 18px;
+  color: rgba(29, 29, 29, 0.739);
+  background-color: rgba(218, 218, 218, 0.924);
+  box-shadow: 4px 3px 10px rgba(0,0,0,0.3);
+}
+.msgsB {
+  padding: 20px;
+  margin-top: 20px;
+  font-size: 18px;
+  background-color: rgba(29, 29, 29, 0.767);
+  color: rgba(245, 245, 245, 0.849);
+  box-shadow: 4px 3px 10px rgba(255, 255, 255, 0.637);
 }
 .author {
   font-size: 16px;
@@ -66,7 +82,7 @@ main {
   width: 200px;
   padding: 8px;
 }
-.textError, .authorError{
+.textError, .authorError, .selectError{
   color: red;
 }
 
@@ -129,7 +145,7 @@ main {
 
 .closeAut, .closeText{
   padding: 10px 50px;
-  background-color: #5ac;;
+  background-color: #5ac;
   border-radius: 10px;
   border: none;
   outline: none;
@@ -137,3 +153,21 @@ main {
   margin: 0 auto;
   margin-top: 20px;
 }
+.select{
+  padding: 10px 50px;
+  background-color: #5ac;
+  border-radius: 10px;
+  border: none;
+  outline: none;
+  color: #fff;
+  margin: 0 auto;
+  margin-bottom: 20px;
+  font-size: 16px;
+}
+.date{
+  color: #888;
+  font-size: 14px;
+  margin-bottom: 15px;
+  text-align: right;
+}
+

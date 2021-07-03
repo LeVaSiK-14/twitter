@@ -12,11 +12,17 @@
         <div class="logo">Twitter</div>
         <div class="msg create-msg">
             <label for="create-msg-author">Author</label>
-            <input type="text" name="msg-author" id="create-msg-author">
+            <input type="text" name="msg-author" id="create-msg-author" value='LEvasiK'>
             <p class="authorError"></p>
             <label for="create-msg-author">Message</label>
-            <textarea id="create-msg-text" name="msg-text"></textarea>
+            <textarea id="create-msg-text" name="msg-text">Text Area Levasik</textarea>
             <p class="textError"></p>
+            <select class='select'>
+                <option value="">Выберете тему!</option>
+                <option value="black">Black</option>
+                <option value="white">White</option>
+            </select>
+            <p class="selectError"></p>
             <button id="sendBtn">Send</button>
         </div>
         <ul class="posts">
@@ -39,5 +45,5 @@
         
     </main>
 </body>
-<script src="./array.js"></script>
+<script src="./array.js" type="module"></script>
 </html>

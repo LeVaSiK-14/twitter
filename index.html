@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+    <main>
+        <div class="logo">Twitter</div>
+        <div class="msg create-msg">
+            <label for="create-msg-author">Author</label>
+            <input type="text" name="msg-author" id="create-msg-author">
+            <p class="authorError"></p>
+            <label for="create-msg-author">Message</label>
+            <textarea id="create-msg-text" name="msg-text"></textarea>
+            <p class="textError"></p>
+            <button id="sendBtn">Send</button>
+        </div>
+        <ul class="posts">
+            
+        </ul>
+
+        <div class="modal-author">
+            <div class="modal-content-author">
+                <h1 class="modal-text">Введите имя автора</h1>
+                <button class="closeAut">ОК!</button>
+            </div>
+        </div>
+
+        <div class="modal-texts">
+            <div class="modal-content-text">
+                <h1 class="modal-text">Введите сообщение</h1>
+                <button class="closeText">ОК!</button>
+            </div>
+        </div>
+        
+    </main>
+</body>
+<script src="./array.js"></script>
+</html>
